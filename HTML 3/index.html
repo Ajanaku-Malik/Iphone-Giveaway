@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>count down timer</title>
+    <style>
+      #countdown {
+        font-size: 55px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 10px;
+        color: white;
+        margin-bottom: 10px;
+      }
+      img {
+        margin: auto;
+        display: block;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-radius: 16px;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(33, 62, 79)">
+    <img src="images/iphone.jpg" height="500px" width="500px" alt="" />
+    <h2
+      style="
+        color: white;
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 10px;
+      "
+    >
+      IPHONE GIVEAWAY LAUNCH
+      <p
+        style="
+          color: white;
+          text-align: left;
+          font-size: 20px;
+          margin-left: 15px;
+          margin-right: 15px;
+        "
+      >
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum, quis
+        voluptates! Atque dicta perferendis eveniet quasi dolorem dolores
+        delectus obcaecati ad vero, ex est quidem commodi modi, possimus at
+        reiciendis ratione! Porro minima eius officiis maiores nostrum,
+        consequatur repudiandae laboriosam magnam voluptate, illo deleniti
+        reiciendis nesciunt velit? Quidem odit facilis maxime soluta veniam
+        laboriosam molestiae labore quas, sed doloremque ipsam cumque, nisi
+        voluptatum eaque animi consequatur numquam minima minus placeat sequi
+        incidunt impedit magni iusto nobis? Non temporibus pariatur, vitae hic
+        ipsum mollitia recusandae laborum praesentium facilis ab odit voluptatum
+        et ut fugit similique aliquam unde possimus quasi dolores voluptatibus!
+      </p>
+    </h2>
+    <div id="countdown"></div>
+
+    <p id="endDate"></p>
+    <p id="endTime"></p>
+
+    <script>
+      // Set the end date and time for the giveaway
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 15);
+      endDate.setHours(endDate.getHours() + 16);
+      endDate.setMinutes(endDate.getMinutes() + 43);
+      endDate.setSeconds(endDate.getSeconds() + 54);
+
+      // Function to update the countdown timer
+      function updateCountdown() {
+        const currentDate = new Date();
+        const timeDifference = endDate - currentDate;
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById(
+          "countdown"
+        ).innerText = `${days} Days, ${hours} Hrs, ${minutes} Mins, ${seconds} Secs`;
+      }
+
+      // Function to update the end date and time paragraphs
+      function updateDateTime() {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+
+        const formattedDate = endDate.toLocaleDateString("en-US", options);
+        const formattedTime = endDate.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        });
+
+        document.getElementById(
+          "endDate"
+        ).innerText = `Giveaway Ends On ${formattedDate}`;
+        document.getElementById("endTime").innerText = `At ${formattedTime}`;
+      }
+
+      // Initial call to update the countdown and date/time paragraphs
+      updateCountdown();
+      updateDateTime();
+
+      // Update the countdown every second
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>
